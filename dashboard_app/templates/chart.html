@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <canvas id="sentimentChart" width="400" height="400"></canvas>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    // Retrieve the sentiment percentage value from the Django view
+                    var positiveSentiment = 0.75;
+                    var negativeSentiment = 0.5;
+                    var neutralSentiment = 0.20
+
+                    // Create the pie chart
+                    var ctx = document.getElementById('sentimentChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Positive', 'Negative', 'Neutral'],
+                            datasets: [{
+                                data: [positiveSentiment, negativeSentiment, neutralSentiment],
+                                backgroundColor: ['#63ff9a', '#FF6384', '#36A2EB'],
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+                </script>
+            </div>
+            <div class="col-8 bg-light">
+                <h3>Positive Tweets</h3>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Tweet Id</th>
+                        <th scope="col">Twitter Handle</th>
+                        <th scope="col">Posting Date</th>
+                        <th scope="col">Message</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if positive_tweets %}
+                        {% for tweet in positive_tweets %}
+                            <tr>
+                                <td>{{ tweet.tweet_id }}</td>
+                                <td>{{ tweet.twitter_handle }}</td>
+                                <td>{{ tweet.posting_date }}</td>
+                                <td>{{ tweet.message }}</td>
+
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            <div class="col-8 bg-light">
+                <h3>Negative Tweets</h3>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Tweet Id</th>
+                        <th scope="col">Twitter Handle</th>
+                        <th scope="col">Posting Date</th>
+                        <th scope="col">Message</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if negative_tweets %}
+                        {% for tweet in negative_tweets %}
+                            <tr>
+                                <td>{{ tweet.tweet_id }}</td>
+                                <td>{{ tweet.twitter_handle }}</td>
+                                <td>{{ tweet.posting_date }}</td>
+                                <td>{{ tweet.message }}</td>
+
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        <div class="col-8 bg-light">
+            <h3>Neutral Tweets</h3>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Tweet Id</th>
+                        <th scope="col">Twitter Handle</th>
+                        <th scope="col">Posting Date</th>
+                        <th scope="col">Message</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% if neutral_tweets %}
+                        {% for tweet in neutral_tweets %}
+                            <tr>
+                                <td>{{ tweet.tweet_id }}</td>
+                                <td>{{ tweet.twitter_handle }}</td>
+                                <td>{{ tweet.posting_date }}</td>
+                                <td>{{ tweet.message }}</td>
+
+                            </tr>
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

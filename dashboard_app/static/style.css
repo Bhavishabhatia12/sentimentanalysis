@@ -1,0 +1,31 @@
+
+body {
+background-size: cover;
+divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+}
+  /* styles.css */
+.common-style {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #45a049;
+}

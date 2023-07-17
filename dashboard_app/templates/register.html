@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        hr {
+            margin: 20px 0;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        form p {
+            margin: 0;
+        }
+        
+        form label {
+            font-weight: bold;
+        }
+        
+        form input,
+        form select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        form small {
+            color: red;
+        }
+        
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<body>
+    <h3>Register here</h3>
+    <hr>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+    
+        {% for field in form %}
+            <div>
+                <p>{{ field.label }}: <br> {{ field }}</p> 
+    
+                {% for error in field.errors %}
+                    <small>{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Register</button>
+    </form> 
+</body>
+</html>
